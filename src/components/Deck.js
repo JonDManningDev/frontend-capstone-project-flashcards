@@ -1,11 +1,11 @@
 export function Deck({ name, description, id, size }) {
   return (
-    <div className="container my-4">
+    <div className="container py-4 border rounded">
       <div className="row">
         <div className="col">
           <h4>{name}</h4>
         </div>
-        <div className="col">
+        <div className="col text-end">
           <p className="text-secondary">{`${size} cards`}</p>
         </div>
       </div>
