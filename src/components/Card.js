@@ -1,10 +1,9 @@
-export function Card({ cards, card, setCard, side, setSide }) {
-    const cardTotal = cards.length;
+export function Card() {
 
     return (
         <div className="card">
             <div className="card-body">
-                <h5 className="card-title">{`Card ${card.id} of ${cardTotal}`}</h5>
+                <h5 className="card-title">{`Card of `}</h5>
             </div>
         </div>
     );
