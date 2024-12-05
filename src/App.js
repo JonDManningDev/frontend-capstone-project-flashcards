@@ -4,16 +4,23 @@ import { useEffect, useState } from "react";
 import { Header } from "./components/common/Header";
 import { Home } from "./components/Home";
 import { Study } from "./components/Study";
+import { CreateDeck } from "./components/CreateDeck";
+import { DeckView } from "./components/DeckView";
+import { AddCard } from "./components/AddCard";
 
 function App() {
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
     async function loadDecks() {
-      const response = await fetch("http://mockhost/decks");
-      const decks = await response.json();
+      try {
+        const response = await fetch("http://mockhost/decks");
+        const decks = await response.json();
 
-      setDecks(decks);
+        setDecks(decks);
+      } catch (error) {
+        console.error("There was an error in loading decks:", error);
+      }      
     }
 
     loadDecks();
@@ -26,6 +33,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home decks={decks} />} />
         <Route path="/decks/:deckId/study" element={<Study />} />
+        <Route path="/decks/new" element={<CreateDeck />} />
+        <Route path="/decks/:deckId" element={<DeckView />} />
+        <Route path="/decks/:deckId/cards/new" element={<AddCard />} />
         <Route path="*" element={<p>Not found.</p>} />
       </Routes>
     </>

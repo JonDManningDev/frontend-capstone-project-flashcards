@@ -1,9 +1,9 @@
-import { Deck } from "./Deck";
+import { DeckListing } from "./DeckListing";
 
 export function DeckList({ decks }) {
 
     const deckList = decks.map((deck) => (
-        <Deck key={deck.id} name={deck.name} description={deck.description} id={deck.id} size={deck.cards.length} />
+        <DeckListing key={deck.id} name={deck.name} description={deck.description} id={deck.id} size={deck.cards.length} />
     ));
 
     return (
