@@ -1,33 +1,30 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-import { CardView } from "./CardView";
+import { DeckForm } from "./common/DeckForm";
 
-export function Study() {
-  const [deck, setDeck] = useState({});
-  const [cards, setCards] = useState([]);
-  const [card, setCard] = useState(null);
-  const [side, setSide] = useState("front");
-
+export function EditDeck() {
   const { deckId } = useParams();
+
+  const [deck, setDeck] = useState([]);
 
   useEffect(() => {
     async function loadDeck(id) {
       try {
         const response = await fetch(`http://mockhost/decks/${id}`);
         const deckData = await response.json();
-        const cardsData = deckData.cards;
 
         setDeck(deckData);
-        setCards(cardsData);
-        setCard(cardsData[0]);
       } catch (error) {
-        console.error("Error loading deck:", error);
+        console.error("There was an error loading the deck:", error);
       }
     }
 
     loadDeck(deckId);
   }, [deckId]);
+
+  const fetchURL = `http://mockhost/decks/${deckId}`;
+  const fetchMethod = "PUT";
 
   const breadcrumb = () => {
     return (
@@ -44,34 +41,18 @@ export function Study() {
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            Study
+            Edit Deck
           </li>
         </ol>
       </nav>
     );
   };
 
-  if (!deck) {
-    return (
-      <p>
-        Deck may either be loading or may not exist. Please wait or return{" "}
-        <Link to="/">home</Link>...
-      </p>
-    );
-  }
-
   return (
     <div className="container">
       {breadcrumb()}
-      <h2>{`${deck.name}: Study`}</h2>
-      <CardView
-        cards={cards}
-        card={card}
-        setCard={setCard}
-        side={side}
-        setSide={setSide}
-        deckId={deckId}
-      />
+      <h2>Edit Deck</h2>
+      <DeckForm fetchURL={fetchURL} fetchMethod={fetchMethod} />
     </div>
   );
 }

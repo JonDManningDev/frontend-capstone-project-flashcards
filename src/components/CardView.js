@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 
-export function Card({ cards, card, setCard, side, setSide, deckId }) {
+export function CardView({ cards, card, setCard, side, setSide, deckId }) {
   const navigate = useNavigate();
 
   const flipHandler = () => {
