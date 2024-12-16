@@ -10,30 +10,13 @@ import { EditDeck } from "./components/EditDeck";
 import { AddCard } from "./components/AddCard";
 import { EditCard } from "./components/EditCard";
 
-function App() {
-  const [decks, setDecks] = useState([]);
-
-  useEffect(() => {
-    async function loadDecks() {
-      try {
-        const response = await fetch("http://mockhost/decks");
-        const decks = await response.json();
-
-        setDecks(decks);
-      } catch (error) {
-        console.error("There was an error in loading decks:", error);
-      }      
-    }
-
-    loadDecks();
-    console.log(decks);
-  }, []);
+function App() {  
 
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home decks={decks} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/decks/:deckId/study" element={<Study />} />
         <Route path="/decks/new" element={<CreateDeck />} />
         <Route path="/decks/:deckId" element={<DeckView />} />

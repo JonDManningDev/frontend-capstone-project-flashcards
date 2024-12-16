@@ -4,7 +4,7 @@ export function CardList({ cards, deck }) {
 
      const rows = cards.map((card) => {
        return (
-         <CardListing card={card} deck={deck} />
+         <CardListing key={card.id} card={card} deck={deck} />
        );
      });
 
