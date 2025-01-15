@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function DeckForm({ fetchURL, fetchMethod }) {
+export function DeckForm({ fetchURL, fetchMethod, deckName, deckDescription }) {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(
+    {
     name: "",
     description: "",
   });
+
+
+  useEffect(() => {
+    if(deckName && deckDescription) {
+        setFormData({
+          name: deckName,
+          description: deckDescription
+        });
+      };
+  }, [deckName, deckDescription]);
+
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -17,18 +30,28 @@ export function DeckForm({ fetchURL, fetchMethod }) {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("User submitted data for a deck:", formData, `Method: ${fetchMethod}`);
-    fetch(fetchURL, {
-      method: fetchMethod,
-      body: {
-        name: formData.name,
-        description: formData.description,
-        cards: [],
-      },
-    });
-  };
+  async function handleSubmit(event) {
+    try {
+      event.preventDefault();
+      console.log(
+        "User submitted data for a deck:",
+        formData,
+        `Method: ${fetchMethod}`
+      );
+      const response = await fetch(fetchURL, {
+        method: fetchMethod,
+        body: {
+          name: formData.name,
+          description: formData.description,
+          cards: [],
+        },
+      });
+      const newDeck = await response.json();
+      navigate(`/decks/${newDeck.id}`);
+    } catch (error) {
+      console.error("There was an error creating the deck:", error);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit} className="my-3">

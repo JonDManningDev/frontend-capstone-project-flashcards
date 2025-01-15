@@ -21,10 +21,7 @@ export function EditDeck() {
     }
 
     loadDeck(deckId);
-  }, [deckId]);
-
-  const fetchURL = `http://mockhost/decks/${deckId}`;
-  const fetchMethod = "PUT";
+  }, [deckId]); 
 
   const breadcrumb = () => {
     return (
@@ -48,11 +45,16 @@ export function EditDeck() {
     );
   };
 
+  const fetchURL = `http://mockhost/decks/${deckId}`;
+  const fetchMethod = "PUT";
+  const deckName = deck.name;
+  const deckDescription = deck.description;
+
   return (
     <div className="container">
       {breadcrumb()}
       <h2>Edit Deck</h2>
-      <DeckForm fetchURL={fetchURL} fetchMethod={fetchMethod} />
+      <DeckForm fetchURL={fetchURL} fetchMethod={fetchMethod} deckName={deckName} deckDescription={deckDescription} />
     </div>
   );
 }

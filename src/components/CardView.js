@@ -77,7 +77,12 @@ export function CardView({ cards, card, setCard, side, setSide, deckId }) {
   };
 
   if (!cards) {
-    return <p>Cards may either be loading or may not extist. Please wait or return <Link to="/">home</Link>...</p>;
+    return (
+      <p>
+        Cards may either be loading or may not extist. Please wait or return{" "}
+        <Link to="/">home</Link>...
+      </p>
+    );
   }
 
   return (
