@@ -21,7 +21,7 @@ export function EditDeck() {
     }
 
     loadDeck(deckId);
-  }, [deckId]); 
+  }, [deckId]);
 
   const breadcrumb = () => {
     return (
@@ -54,7 +54,12 @@ export function EditDeck() {
     <div className="container">
       {breadcrumb()}
       <h2>Edit Deck</h2>
-      <DeckForm fetchURL={fetchURL} fetchMethod={fetchMethod} deckName={deckName} deckDescription={deckDescription} />
+      <DeckForm
+        fetchURL={fetchURL}
+        fetchMethod={fetchMethod}
+        deckName={deckName}
+        deckDescription={deckDescription}
+      />
     </div>
   );
 }

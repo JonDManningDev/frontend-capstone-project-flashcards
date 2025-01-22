@@ -51,7 +51,7 @@ export function DeckForm({ fetchURL, fetchMethod, deckName, deckDescription }) {
     } catch (error) {
       console.error("There was an error creating the deck:", error);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="my-3">
