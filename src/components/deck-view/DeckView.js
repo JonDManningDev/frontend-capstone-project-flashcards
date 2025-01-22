@@ -21,6 +21,7 @@ export function DeckView() {
         setCards(cardsData);
       } catch (error) {
         console.error("There was an error loading the deck:", error);
+        navigate("/");
       }
     }
 

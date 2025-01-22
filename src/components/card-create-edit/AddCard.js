@@ -1,9 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { CardForm } from "./CardForm";
 
 export function AddCard() {
+  const navigate = useNavigate();
+
   const { deckId } = useParams();
 
   const [deck, setDeck] = useState({});
@@ -17,6 +19,7 @@ export function AddCard() {
         setDeck(deckData);
       } catch (error) {
         console.error("There was an error loading the deck:", error);
+        navigate("/");
       }
     }
 

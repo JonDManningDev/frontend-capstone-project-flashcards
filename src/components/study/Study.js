@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { CardView } from "./CardView";
 
 export function Study() {
+  const navigate = useNavigate();
+
   const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
   const [card, setCard] = useState(null);
@@ -23,6 +25,7 @@ export function Study() {
         setCard(cardsData[0]);
       } catch (error) {
         console.error("Error loading deck:", error);
+        navigate("/");
       }
     }
 

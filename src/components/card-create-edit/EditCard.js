@@ -1,33 +1,43 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { CardForm } from "./CardForm";
 
 export function EditCard() {
+  const navigate = useNavigate();
+
   const { deckId, cardId } = useParams();
 
   const [deck, setDeck] = useState({});
   const [card, setCard] = useState({});
 
   useEffect(() => {
-    async function loadCard(deckId, cardId) {
+    async function loadDeck(deckId) {
       try {
-        const response = await fetch(`http://mockhost/decks/${deckId}`);
-        const deckData = await response.json();
-        const currentCard = deckData.cards.find(
-          (card) => card.id === parseInt(cardId)
-        );
+        const deckResponse = await fetch(`http://mockhost/decks/${deckId}`);
+        const deckData = await deckResponse.json();
 
         setDeck(deckData);
-        setCard(currentCard);
       } catch (error) {
-        console.error(
-          "There was an error loading the deck and/or card:",
-          error
+        console.error("There was an error loading the deck:", error);
+        navigate("/");
+      }
+    }
+    async function loadCard(deckId, cardId) {
+      try {
+        const cardResponse = await fetch(
+          `http://mockhost/decks/${deckId}/cards/${cardId}`
         );
+        const cardData = await cardResponse.json();
+
+        setCard(cardData);
+      } catch (error) {
+        console.error("There was an error loading the card:", error);
+        navigate(`/decks/${deckId}`);
       }
     }
 
+    loadDeck(deckId);
     loadCard(deckId, cardId);
   }, [deckId, cardId]);
 
