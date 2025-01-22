@@ -10,12 +10,12 @@ export function Home() {
 
   async function loadDecks() {
     try {
-        const response = await fetch("http://mockhost/decks");
-        const decks = await response.json();
+      const response = await fetch("http://mockhost/decks");
+      const decks = await response.json();
 
-        setDecks(decks);
+      setDecks(decks);
     } catch (error) {
-        console.error("There was an error in loading decks:", error);
+      console.error("There was an error in loading decks:", error);
     }
   }
 

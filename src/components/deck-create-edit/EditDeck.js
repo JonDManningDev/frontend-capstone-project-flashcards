@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { DeckForm } from "./common/DeckForm";
+import { DeckForm } from "./DeckForm";
 
 export function EditDeck() {
   const { deckId } = useParams();

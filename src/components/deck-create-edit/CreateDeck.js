@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { DeckForm } from "./common/DeckForm";
+import { DeckForm } from "./DeckForm";
 
 export function CreateDeck() {
   const fetchURL = "http://mockhost/decks";
