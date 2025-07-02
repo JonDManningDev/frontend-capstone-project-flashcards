@@ -14,4 +14,4 @@ The primary views/components and their functions are as follows:
 - Add Card: renders a form component that allows the user to create a new card, with specified text for front and back sides, for a given deck.
 - Edit Card: renders a form component that allows the user to modify the front and back of a given card. Existing information is pre-populated into its respective input field.
 
-*This application currently uses a mockhost to handle deck and card data only temporarily. In the future, I may update this to allow for permanent storage.*
+*This application currently uses a mockhost to handle deck and card data only temporarily. In the future, I may update this to implement a proper backend and database.*
